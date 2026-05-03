@@ -1,0 +1,16 @@
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\bin\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.exe
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\bin\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.deps.json
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\bin\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.runtimeconfig.json
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\bin\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.dll
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\bin\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.pdb
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\obj\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.Form1.resources
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\obj\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.csproj.GenerateResource.cache
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\obj\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\obj\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.AssemblyInfoInputs.cache
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\obj\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.AssemblyInfo.cs
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\obj\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.csproj.CoreCompileInputs.cache
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\obj\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.dll
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\obj\Debug\net8.0-windows\refint\ProyectoFinalSimuladorSeguridadInformatica.dll
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\obj\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.pdb
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\obj\Debug\net8.0-windows\ProyectoFinalSimuladorSeguridadInformatica.genruntimeconfig.cache
+C:\Users\AlumnoM\Documents\Bery\Proyectos\Matias\ProyectoFinalSimuladorSeguridadInformatica\obj\Debug\net8.0-windows\ref\ProyectoFinalSimuladorSeguridadInformatica.dll
