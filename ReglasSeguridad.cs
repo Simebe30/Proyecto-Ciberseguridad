@@ -22,8 +22,8 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
             contrasenasDicc = contrasenas;
         }
 
-    
-// ─────────────────────────────────────────────
+
+        // ─────────────────────────────────────────────
         // NORMALIZACIÓN LEET SPEAK
         // Convierte símbolos comunes en letras (ej: @ → a)
         // para evitar que se “camuflen” palabras débiles
@@ -48,18 +48,13 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // COMPROBACIÓN DE DICCIONARIO
         // Detecta si la contraseña contiene palabras débiles conocidas
         // ─────────────────────────────────────────────
-        public int breakDiccionario(string password)
+        public bool ContieneDiccionario(string password)
         {
             password = NormalizarLeet(password);
 
-            if (contrasenasDicc.Any(p => password.ToLower().Contains(p)))
-            {
-                return 0; // contraseña insegura
-            }
-
-            return 1; // contraseña aceptable
+            return contrasenasDicc.Any(p => password.ToLower().Contains(p));
         }
-    
+
 
         // ─────────────────────────────────────────────
         // DETECCIÓN DE AÑOS
