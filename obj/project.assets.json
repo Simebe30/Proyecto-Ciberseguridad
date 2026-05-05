@@ -8,26 +8,24 @@
     "net8.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\AlumnoM\\.nuget\\packages\\": {}
+    "C:\\Users\\berto\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\AlumnoM\\Documents\\Bery\\Proyectos\\Matias\\ProyectoFinalSimuladorSeguridadInformatica\\ProyectoFinalSimuladorSeguridadInformatica.csproj",
+      "projectUniqueName": "C:\\Users\\berto\\Music\\ProyectoFinalSimuladorSeguridadInformatica\\ProyectoFinalSimuladorSeguridadInformatica\\ProyectoFinalSimuladorSeguridadInformatica.csproj",
       "projectName": "ProyectoFinalSimuladorSeguridadInformatica",
-      "projectPath": "C:\\Users\\AlumnoM\\Documents\\Bery\\Proyectos\\Matias\\ProyectoFinalSimuladorSeguridadInformatica\\ProyectoFinalSimuladorSeguridadInformatica.csproj",
-      "packagesPath": "C:\\Users\\AlumnoM\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\AlumnoM\\Documents\\Bery\\Proyectos\\Matias\\ProyectoFinalSimuladorSeguridadInformatica\\obj\\",
+      "projectPath": "C:\\Users\\berto\\Music\\ProyectoFinalSimuladorSeguridadInformatica\\ProyectoFinalSimuladorSeguridadInformatica\\ProyectoFinalSimuladorSeguridadInformatica.csproj",
+      "packagesPath": "C:\\Users\\berto\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\berto\\Music\\ProyectoFinalSimuladorSeguridadInformatica\\ProyectoFinalSimuladorSeguridadInformatica\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\AlumnoM\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\berto\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0-windows"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -45,8 +43,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.300"
+      }
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -70,7 +67,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

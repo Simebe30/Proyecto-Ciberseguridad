@@ -14,28 +14,29 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
 
         private void execute()
         {
-            Contraseña contraseña = new Contraseña();
-            string contra = new string(contraseña.Generador(30));
+            Contrasena contrasena = new Contrasena();
+            string contra = new string(contrasena.Generador(30));
 
             string jsonString = File.ReadAllText("contrasTipicas.json");
-            List<string> contraseñasTipicas = JsonSerializer.Deserialize<List<string>>(jsonString);
+            List<string> contrasenasTipicas = JsonSerializer.Deserialize<List<string>>(jsonString);
 
-            if (contraseñasTipicas == null)
+            if (contrasenasTipicas == null)
             {
-                Console.WriteLine("No se pudieron deserializar las contraseñas típicas.");
+                Console.WriteLine("No se pudieron deserializar las contrasenas tnpicas.");
             }
             else
             {
-                contraseña.SetContraseñasDicc(contraseñasTipicas);
+                contrasena.SetContrasenasDicc(contrasenasTipicas);
             }
 
-            contraseña.Analizador("p@ss");
+            contrasena.Analizador("p@ss");
 
-            Console.WriteLine(contraseña.Analizador("cba"));
-            Console.WriteLine(contraseña.Analizador("12345"));
-            contraseña.Analizador("11111");
-            contraseña.Analizador("password");
-            contraseña.Analizador(contra);
+            Console.WriteLine(contrasena.Analizador("cba"));
+            Console.WriteLine(contrasena.Analizador("12345"));
+            Console.WriteLine(contrasena.Analizador("mfadsiof8492htwe0p9g8psd"));
+            contrasena.Analizador("11111");
+            contrasena.Analizador("password");
+            contrasena.Analizador(contra);
 
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
