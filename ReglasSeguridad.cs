@@ -17,7 +17,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // CARGA DEL DICCIONARIO
         // Permite asignar una lista externa de contraseñas débiles conocidas
         // ─────────────────────────────────────────────
-        public void SetContrasenasDicc(List<string> contrasenas)
+        public ReglasSeguridad(List<string> contrasenas)
         {
             contrasenasDicc = contrasenas;
         }

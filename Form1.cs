@@ -14,41 +14,41 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
 
         private void execute()
         {
-            Contrasena contrasena = new Contrasena();
-            string contra = new string(contrasena.Generador(30));
+
 
             string jsonString = File.ReadAllText("contrasTipicas.json");
-            List<string> contrasenasTipicas = JsonSerializer.Deserialize<List<string>>(jsonString);
+            List<string> diccionario = JsonSerializer.Deserialize<List<string>>(jsonString);
 
-            if (contrasenasTipicas == null)
+            if (diccionario == null)
             {
-                Console.WriteLine("No se pudieron deserializar las contrasenas tnpicas.");
-            }
-            else
-            {
-                contrasena.SetContrasenasDicc(contrasenasTipicas);
+                Console.WriteLine("No se pudieron deserializar las contraseñas típicas.");
+                return;
             }
 
-            contrasena.Analizador("p@ss");
+            ReglasSeguridad reglas = new(diccionario);
+            AnalizadorContra analizador = new(reglas);
+            GeneradorContra generador = new();
 
-            Console.WriteLine(contrasena.Analizador("cba"));
-            Console.WriteLine(contrasena.Analizador("12345"));
-            Console.WriteLine(contrasena.Analizador("mfadsiof8492htwe0p9g8psd"));
-            contrasena.Analizador("11111");
-            contrasena.Analizador("password");
-            contrasena.Analizador(contra);
+            // Generar
+            string password = generador.Generar(12);
+            Console.WriteLine("Generada: " + password);
 
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Title = "Seleccionar archivo",            };
+            // Analizar
+            string resultado = analizador.Analizar(password);
+            Console.WriteLine("Resultado: " + resultado);
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string rutaArchivo = openFileDialog.FileName;
+            //OpenFileDialog openFileDialog = new OpenFileDialog
+           // {
+          //      Title = "Seleccionar archivo",
+           // };
 
-                Escaner escaner = new Escaner(rutaArchivo);
-                escaner.analizar();
-            }
+           // if (openFileDialog.ShowDialog() == DialogResult.OK)
+          //  {
+             //   string rutaArchivo = openFileDialog.FileName;
+
+                //Escaner escaner = new Escaner(rutaArchivo);
+               // escaner.analizar();
+          //  }
 
 
         }

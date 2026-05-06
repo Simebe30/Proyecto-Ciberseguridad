@@ -3,9 +3,9 @@ using System;
 namespace ProyectoFinalSimuladorSeguridadInformatica
 {
     // Se encarga SOLO de generar contraseñas
-    public class GeneradorContrasena
+    public class GeneradorContra
     {
-         public string Generador(int longitud)
+        public string Generar(int longitud)
         {
             string caracteres = "!@#$%^&*()_+-=[]{}|;':,.<>/?" +
                                 "abcdefghijklmnopqrstuvwxyz0123456789";
