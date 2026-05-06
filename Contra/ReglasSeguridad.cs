@@ -1,7 +1,3 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
-
 namespace ProyectoFinalSimuladorSeguridadInformatica
 {
     // Se encarga SOLO de reglas de seguridad

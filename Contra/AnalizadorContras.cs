@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 namespace ProyectoFinalSimuladorSeguridadInformatica
 {
     // Se encarga SOLO de evaluar la contraseña

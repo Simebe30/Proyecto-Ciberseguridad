@@ -1,5 +1,3 @@
-using System;
-
 namespace ProyectoFinalSimuladorSeguridadInformatica
 {
     // Se encarga SOLO de generar contraseñas

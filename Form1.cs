@@ -1,18 +1,19 @@
-using System.IO;
+using static ProyectoFinalSimuladorSeguridadInformatica.Escaner;
 using System.Text.Json;
 
 namespace ProyectoFinalSimuladorSeguridadInformatica
 {
     public partial class Form1 : Form
     {
+        public Escaner Escaner { get; set; }
         public Form1()
         {
             InitializeComponent();
-            execute();
-
+            Escaner = new ProyectoFinalSimuladorSeguridadInformatica.Escaner();
+            Execute();
         }
 
-        private void execute()
+        private void Execute()
         {
 
 
@@ -21,7 +22,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
 
             if (diccionario == null || diccionario.Count == 0)
             {
-    Console.WriteLine("Aviso: no hay diccionario cargado");                return;
+                Console.WriteLine("Aviso: no hay diccionario cargado"); return;
             }
 
             ReglasSeguridad reglas = new(diccionario);
@@ -36,18 +37,20 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
             string resultado = analizador.Analizar(password);
             Console.WriteLine("Resultado: " + resultado);
 
-            //OpenFileDialog openFileDialog = new OpenFileDialog
-           // {
-          //      Title = "Seleccionar archivo",
-           // };
 
-           // if (openFileDialog.ShowDialog() == DialogResult.OK)
-          //  {
-             //   string rutaArchivo = openFileDialog.FileName;
 
-                //Escaner escaner = new Escaner(rutaArchivo);
-               // escaner.analizar();
-          //  }
+            //Escaner
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "Seleccionar archivo",
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string rutaArchivo = openFileDialog.FileName;
+                Escaner.AddRuta(rutaArchivo);
+                Console.WriteLine(Escaner.Analizar());
+            }
 
 
         }

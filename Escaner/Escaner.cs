@@ -1,9 +1,8 @@
-﻿
-using System.Text;
+﻿using System.Text;
 
 namespace ProyectoFinalSimuladorSeguridadInformatica
 {
-    internal class Escaner
+    public class Escaner
     {
         // ─────────────────────────────────────────────
         // LISTAS DE REFERENCIA
@@ -79,20 +78,24 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         private int riesgoTotal = 0;
 
         // ─────────────────────────────────────────────
-        // CONSTRUCTOR
         // Extrae automáticamente los datos del archivo
         // ─────────────────────────────────────────────
-        public Escaner(string ruta)
+
+        public void AddRuta(string ruta)
         {
+            if (string.IsNullOrEmpty(ruta))
+            {
+                logBuilder.AppendLine("[ERROR] La ruta proporcionada está vacía o nula.");
+                return;
+            }
             FileInfo fileInfo = new FileInfo(ruta);
 
             this.ruta = ruta;
-            this.nombreArchivo = fileInfo.Name;
-            this.extension = fileInfo.Extension;
-            this.tamanoArchivo = fileInfo.Length;
-            this.nombreDirectorio = fileInfo.DirectoryName ?? ""; //Forzamos para manejar el caso de que sea null
+            nombreArchivo = fileInfo.Name;
+            extension = fileInfo.Extension;
+            tamanoArchivo = fileInfo.Length;
+            nombreDirectorio = fileInfo.DirectoryName ?? ""; 
         }
-
         // ─────────────────────────────────────────────
         // MÉTODO PRINCIPAL DE ANÁLISIS
         // ─────────────────────────────────────────────
@@ -119,7 +122,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // ─────────────────────────────────────────────
         // ANÁLISIS DE Ruta
         // ─────────────────────────────────────────────
-        public bool EscanearRuta()
+        protected bool EscanearRuta()
         {
             if (!File.Exists(ruta) && !Directory.Exists(ruta))
             {
@@ -131,7 +134,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // ─────────────────────────────────────────────
         // ANÁLISIS DE EXTENSIÓN
         // ─────────────────────────────────────────────
-        public void EvaluarExtension()
+        protected void EvaluarExtension()
         {
             if (DangerousExtensions.Contains(extension.ToLower()))
             {
@@ -153,7 +156,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // ─────────────────────────────────────────────
         // ANÁLISIS DE RUTA
         // ─────────────────────────────────────────────
-        public void EvaluarNombreDirectorio()
+        protected void EvaluarNombreDirectorio()
         {
             //Comprobamos si la ruta del archivo es igual a null, si es así, asignamos una cadena vacía para evitar errores
             string path = nombreDirectorio?.ToLower() ?? "";
@@ -181,7 +184,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // ANÁLISIS DEL NOMBRE DEL ARCHIVO
         // Busca palabras clave típicas de malware
         // ─────────────────────────────────────────────
-        public void EvaluarNombre()
+        protected void EvaluarNombre()
         {
             string lower = nombreArchivo.ToLower();
 
@@ -208,7 +211,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // ANÁLISIS DEL TAMAÑO
         // Detecta tamaños anómalos (muy grandes o muy pequeños)
         // ─────────────────────────────────────────────
-        public void EvaluarTamano()
+        protected void EvaluarTamano()
         {
             if (tamanoArchivo > 100 * 1024 * 1024) // Mayor a 100 MB
             {
@@ -239,12 +242,12 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // ─────────────────────────────────────────────
         // GUARDA EL LOG EN UN ARCHIVO
         // ─────────────────────────────────────────────
-        public void GuardarLog()
+        protected void GuardarLog()
         {
             File.WriteAllText(logPath, logBuilder.ToString());
         }
         // Devuelve el log completo
-        public StringBuilder GetLog()
+        protected StringBuilder GetLog()
         {
             return logBuilder;
         }
@@ -252,7 +255,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // RESULTADO FINAL
         // Clasifica el riesgo según la puntuación acumulada
         // ─────────────────────────────────────────────
-        public string EvaluarSeguridad()
+        protected string EvaluarSeguridad()
         {
 
             if (riesgoTotal > 100)
