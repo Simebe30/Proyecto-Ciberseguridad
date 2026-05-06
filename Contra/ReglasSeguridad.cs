@@ -24,7 +24,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // Convierte símbolos comunes en letras (ej: @ → a)
         // para evitar que se “camuflen” palabras débiles
         // ─────────────────────────────────────────────
-        public string NormalizarLeet(string password)
+        protected string NormalizarLeet(string password)
         {
             return password.ToLower()
                     .Replace("@", "a")
@@ -44,7 +44,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // COMPROBACIÓN DE DICCIONARIO
         // Detecta si la contraseña contiene palabras débiles conocidas
         // ─────────────────────────────────────────────
-        public bool ContieneDiccionario(string password)
+        protected bool ContieneDiccionario(string password)
         {
             password = NormalizarLeet(password);
 
@@ -56,7 +56,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // DETECCIÓN DE AÑOS
         // Penaliza si aparece un año típico (1900 - año actual)
         // ─────────────────────────────────────────────
-        public float Ano(string password, float points)
+        protected float Ano(string password, float points)
         {
             string nums = new string(password.Where(char.IsDigit).ToArray());
 
@@ -73,7 +73,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // DETECCIÓN DE CARACTERES REPETIDOS
         // Penaliza repeticiones consecutivas (ej: "aaaa", "1111")
         // ─────────────────────────────────────────────
-        public float Repeticiones(string password, float points)
+        protected float Repeticiones(string password, float points)
         {
             float restar = 1.0f / password.Length;
 
@@ -90,7 +90,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // DETECCIÓN DE SECUENCIAS
         // Penaliza patrones como "abc", "123" o "cba"
         // ─────────────────────────────────────────────
-        public float Secuencias(string password, float points)
+        protected float Secuencias(string password, float points)
         {
             float restar = 1.0f / password.Length;
 
