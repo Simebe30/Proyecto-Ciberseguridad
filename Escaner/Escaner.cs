@@ -90,11 +90,18 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
             }
             FileInfo fileInfo = new FileInfo(ruta);
 
+            if (!fileInfo.Exists)
+            {
+                logBuilder.AppendLine($"[ERROR] El archivo '{ruta}' no existe.");
+                return;
+            }
             this.ruta = ruta;
+
+            // Si no existen las variables, asignamos valores por defecto para evitar errores posteriores
             nombreArchivo = fileInfo.Name;
             extension = fileInfo.Extension;
             tamanoArchivo = fileInfo.Length;
-            nombreDirectorio = fileInfo.DirectoryName ?? ""; 
+            nombreDirectorio = fileInfo.DirectoryName ?? "";
         }
         // ─────────────────────────────────────────────
         // MÉTODO PRINCIPAL DE ANÁLISIS
@@ -112,6 +119,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
                 EvaluarNombreDirectorio();
                 EvaluarNombre();
                 EvaluarTamano();
+                GuardarLog();
             }
 
             // Devuelve resultado final
@@ -244,13 +252,51 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         // ─────────────────────────────────────────────
         protected void GuardarLog()
         {
-            File.WriteAllText(logPath, logBuilder.ToString());
+            if (logBuilder.Length == 0)
+            {
+                Console.WriteLine("[INFO] No se han registrado eventos durante el análisis.");
+                return;
+            }
+
+            // Añadimos cabecera al log
+            logBuilder.AppendLine( $"Análisis del archivo: {ruta}\nFecha: {DateTime.Now}\n\n");
+
+            try
+            {
+                // Ruta de Descargas del usuario
+                string downloads = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                    "Downloads"
+                );
+
+                // Creamos una carpeta propia dentro de Descargas
+                string carpeta = Path.Combine(downloads, "AnalizadorSeguridad");
+
+                if (!Directory.Exists(carpeta))
+                {
+                    Directory.CreateDirectory(carpeta);
+                }
+
+                // Ruta final del log
+                string nombre = $"log_analisis_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
+                string rutaFinal = Path.Combine(carpeta, nombre);
+
+                if (File.Exists(rutaFinal))
+                {
+                    Console.WriteLine($"[ERROR] Ya existe un log con el nombre '{nombre}'. No se guardará el nuevo log para evitar sobrescribir.");
+                   return;
+                }
+                // Guardamos el archivo
+                File.WriteAllText(rutaFinal, logBuilder.ToString());
+
+                Console.WriteLine($"[OK] Log guardado en: {rutaFinal}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] No se pudo guardar el log: {ex.Message}");
+            }
         }
-        // Devuelve el log completo
-        protected StringBuilder GetLog()
-        {
-            return logBuilder;
-        }
+
         // ─────────────────────────────────────────────
         // RESULTADO FINAL
         // Clasifica el riesgo según la puntuación acumulada

@@ -1,4 +1,3 @@
-using static ProyectoFinalSimuladorSeguridadInformatica.Escaner;
 using System.Text.Json;
 
 namespace ProyectoFinalSimuladorSeguridadInformatica
@@ -9,7 +8,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         public Form1()
         {
             InitializeComponent();
-            Escaner = new ProyectoFinalSimuladorSeguridadInformatica.Escaner();
+            Escaner = new Escaner();
             Execute();
         }
 

@@ -1,0 +1,7 @@
+Análisis del archivo: C:\Users\berto\Downloads\en_SRWEv7_PTSA_Part_1_Public_1.pkt
+Fecha: 06/05/2026 17:32:06
+
+[BAJO] Extensión normal: .pkt
+[BAJO] Ruta normal
+[BAJO] Nombre limpio
+[BAJO] El archivo 'en_SRWEv7_PTSA_Part_1_Public_1.pkt' tiene un tamaño común (0 MB)
