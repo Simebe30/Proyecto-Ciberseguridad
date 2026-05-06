@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ProyectoFinalSimuladorSeguridadInformatica
 {
     internal class Escaner
     {
-        // ── Listas de referencia ─────────────────────────────────
+        // ─────────────────────────────────────────────
+        // LISTAS DE REFERENCIA
+        // Definen qué elementos se consideran peligrosos o sospechosos
+        // ─────────────────────────────────────────────
 
-        private readonly string[] DangerousExtensions = 
+        // Extensiones claramente peligrosas (ejecutables, scripts, etc.)
+        private readonly string[] DangerousExtensions =
         {
             ".exe", ".bat", ".cmd", ".msi", ".scr", ".pif",
             ".com", ".vbs", ".vbe", ".js",  ".jse", ".wsf",
@@ -18,6 +19,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
             ".dll", ".sys", ".drv", ".lnk"
         };
 
+        // Extensiones que pueden ser sospechosas (comprimidos o scripts)
         private readonly string[] SuspiciousExtensions =
         {
             ".zip", ".rar", ".7z",  ".tar", ".gz",  ".iso",
@@ -25,7 +27,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
             ".py",  ".rb",  ".pl",  ".php", ".apk", ".app"
         };
 
-
+        // Palabras clave claramente asociadas a malware
         private readonly string[] DangerousKeywords =
         {
             "virus", "hack", "crack", "keygen", "trojan", "malware",
@@ -35,70 +37,100 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
             "loader", "stealer", "grabber", "rat", "crypter"
         };
 
-        private readonly string[] SuspiciousKeywords = 
+        // Palabras sospechosas (no necesariamente malware, pero dudosas)
+        private readonly string[] SuspiciousKeywords =
         {
             "patch", "activat", "serial", "license", "nulled",
             "leaked", "dump", "brute", "flood", "scanner",
             "crawler", "scraper", "autobot", "setup", "gen_"
         };
-        private readonly string[] DangerousPaths = 
+
+        // Rutas críticas del sistema (alto riesgo si aparece un archivo ahí)
+        private readonly string[] DangerousPaths =
         {
             "C:\\Windows\\System32", "C:\\Program Files", "C:\\Program Files (x86)",
             "C:\\Users\\Public", "C:\\Users\\Default", "C:\\Users\\All Users",
             "C:\\Temp", "C:\\Windows\\Temp", "C:\\Windows\\Prefetch",
             "C:\\Windows\\SysWOW64", "C:\\Windows\\WinSxS"
-        };
-        private readonly string[] SuspiciousPaths = 
+        };        // Rutas comunes donde suelen descargarse archivos sospechosos
+
+        private readonly string[] SuspiciousPaths =
         {
             "C:\\Downloads", "C:\\Desktop", "C:\\Documents and Settings",
             "C:\\Users\\%USERNAME%\\Downloads", "C:\\Users\\%USERNAME%\\Desktop",
             "C:\\Users\\%USERNAME%\\Documents", "C:\\Users\\%USERNAME%\\AppData\\Local",
             "C:\\Users\\%USERNAME%\\AppData\\Roaming"
         };
-        
+
+        // ─────────────────────────────────────────────
+        // DATOS DEL ARCHIVO A ANALIZAR
+        // ─────────────────────────────────────────────
         private string ruta;
         private string nombreDirectorio;
         private string nombreArchivo;
         private string extension;
         private long tamanoArchivo;
-        private string logPath = "log_analisis.txt";
-        private  StringBuilder logBuilder = new StringBuilder();
-        private  int riesgoTotal = 0;
 
+        // Log donde se guarda todo el análisis paso a paso
+        private string logPath = "log_analisis.txt";
+        private StringBuilder logBuilder = new StringBuilder();
+
+        // Variable acumulativa del riesgo total
+        private int riesgoTotal = 0;
+
+        // ─────────────────────────────────────────────
+        // CONSTRUCTOR
+        // Extrae automáticamente los datos del archivo
+        // ─────────────────────────────────────────────
         public Escaner(string ruta)
         {
             FileInfo fileInfo = new FileInfo(ruta);
+
             this.ruta = ruta;
             this.nombreArchivo = fileInfo.Name;
             this.extension = fileInfo.Extension;
             this.tamanoArchivo = fileInfo.Length;
-            this.nombreDirectorio = fileInfo.DirectoryName;
+            this.nombreDirectorio = fileInfo.DirectoryName ?? ""; //Forzamos para manejar el caso de que sea null
         }
-        public string analizar()
+
+        // ─────────────────────────────────────────────
+        // MÉTODO PRINCIPAL DE ANÁLISIS
+        // ─────────────────────────────────────────────
+        public string Analizar()
         {
             riesgoTotal = 0;
+            //Borramos la información del log anterior para empezar uno nuevo
             logBuilder.Clear();
 
+            // Primero comprobamos si la ruta existe
             if (EscanearRuta())
             {
                 EvaluarExtension();
-                EvaluarnombreDirectorio();
+                EvaluarNombreDirectorio();
                 EvaluarNombre();
                 EvaluarTamano();
             }
 
+            // Devuelve resultado final
             return EvaluarSeguridad();
 
         }
+
+        // ─────────────────────────────────────────────
+        // ANÁLISIS DE Ruta
+        // ─────────────────────────────────────────────
         public bool EscanearRuta()
         {
-            if(!File.Exists(ruta) && !Directory.Exists(ruta))
+            if (!File.Exists(ruta) && !Directory.Exists(ruta))
             {
                 logBuilder.AppendLine($"[ERROR] La ruta '{ruta}' no existe.");
                 return false;
             }
             return true;
         }
+        // ─────────────────────────────────────────────
+        // ANÁLISIS DE EXTENSIÓN
+        // ─────────────────────────────────────────────
         public void EvaluarExtension()
         {
             if (DangerousExtensions.Contains(extension.ToLower()))
@@ -117,10 +149,17 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
                 logBuilder.AppendLine($"[BAJO] Extensión normal: {extension}");
             }
         }
-        public void EvaluarnombreDirectorio()
+
+        // ─────────────────────────────────────────────
+        // ANÁLISIS DE RUTA
+        // ─────────────────────────────────────────────
+        public void EvaluarNombreDirectorio()
         {
+            //Comprobamos si la ruta del archivo es igual a null, si es así, asignamos una cadena vacía para evitar errores
             string path = nombreDirectorio?.ToLower() ?? "";
 
+            //Comprobamos si nuestra ruta esta en alguno a de los string[], si es así, sumamos el riesgo correspondiente
+            // y añadimos una línea al log indicando el resultado
             if (DangerousPaths.Any(p => path.Contains(p.ToLower())))
             {
                 riesgoTotal += 35;
@@ -137,7 +176,11 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
                 logBuilder.AppendLine("[BAJO] Ruta normal");
             }
         }
-
+        // ───────
+        // ──────────────────────────────────────
+        // ANÁLISIS DEL NOMBRE DEL ARCHIVO
+        // Busca palabras clave típicas de malware
+        // ─────────────────────────────────────────────
         public void EvaluarNombre()
         {
             string lower = nombreArchivo.ToLower();
@@ -161,6 +204,10 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
                 logBuilder.AppendLine($"[BAJO] Nombre limpio");
             }
         }
+        // ─────────────────────────────────────────────
+        // ANÁLISIS DEL TAMAÑO
+        // Detecta tamaños anómalos (muy grandes o muy pequeños)
+        // ─────────────────────────────────────────────
         public void EvaluarTamano()
         {
             if (tamanoArchivo > 100 * 1024 * 1024) // Mayor a 100 MB
@@ -168,7 +215,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
                 logBuilder.AppendLine($"[ALTO] El archivo '{nombreArchivo}' es muy grande ({tamanoArchivo / (1024 * 1024)} MB)");
                 riesgoTotal += 27;
             }
-            else if (tamanoArchivo > 10 * 1024 * 1024 ) // Mayor a 10 MB
+            else if (tamanoArchivo > 10 * 1024 * 1024) // Mayor a 10 MB
             {
                 logBuilder.AppendLine($"[MEDIO] El archivo '{nombreArchivo}' es grande ({tamanoArchivo / (1024 * 1024)} MB)");
                 riesgoTotal += 17;
@@ -188,17 +235,26 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
                 logBuilder.AppendLine($"[BAJO] El archivo '{nombreArchivo}' tiene un tamaño común ({tamanoArchivo / (1024 * 1024)} MB)");
             }
         }
-         public void GuardarLog()
+
+        // ─────────────────────────────────────────────
+        // GUARDA EL LOG EN UN ARCHIVO
+        // ─────────────────────────────────────────────
+        public void GuardarLog()
         {
             File.WriteAllText(logPath, logBuilder.ToString());
         }
-        public StringBuilder getLog()
+        // Devuelve el log completo
+        public StringBuilder GetLog()
         {
             return logBuilder;
         }
+        // ─────────────────────────────────────────────
+        // RESULTADO FINAL
+        // Clasifica el riesgo según la puntuación acumulada
+        // ─────────────────────────────────────────────
         public string EvaluarSeguridad()
         {
-            
+
             if (riesgoTotal > 100)
                 return $"RIESGO MUY ALTO (100%)";
 
@@ -210,6 +266,6 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
 
             return $"ALTO ({riesgoTotal}%)";
         }
-    
+
     }
 }
