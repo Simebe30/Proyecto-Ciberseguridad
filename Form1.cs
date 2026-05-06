@@ -19,10 +19,9 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
             string jsonString = File.ReadAllText("contrasTipicas.json");
             List<string> diccionario = JsonSerializer.Deserialize<List<string>>(jsonString);
 
-            if (diccionario == null)
+            if (diccionario == null || diccionario.Count == 0)
             {
-                Console.WriteLine("No se pudieron deserializar las contraseñas típicas.");
-                return;
+    Console.WriteLine("Aviso: no hay diccionario cargado");                return;
             }
 
             ReglasSeguridad reglas = new(diccionario);

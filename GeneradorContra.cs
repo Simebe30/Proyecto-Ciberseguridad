@@ -10,6 +10,10 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
             string caracteres = "!@#$%^&*()_+-=[]{}|;':,.<>/?" +
                                 "abcdefghijklmnopqrstuvwxyz0123456789";
 
+            
+            if (longitud < 8)
+                return "Error: la longitud mínima recomendada es de 8 caracteres";
+
             Random rnd = new Random();
             char[] contrasenaArray = new char[longitud];
 
@@ -18,6 +22,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
             {
                 contrasenaArray[i] = caracteres[rnd.Next(caracteres.Length)];
             }
+
 
             return new string(contrasenaArray);
         }

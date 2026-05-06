@@ -15,7 +15,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         public string Analizar(string password)
         {
             if (string.IsNullOrEmpty(password))
-                return "Débil: contraseña vacía";
+                return "Error: la contraseña no puede estar vacía";
 
             if (reglas.ContieneDiccionario(password))
                 return "Débil: contiene palabras comunes";
@@ -106,9 +106,9 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         {
             return puntuacion switch
             {
-                <= 3 => "Debil",
-                <= 6 => "Media",
-                _ => "Fuerte"
+                <= 3 => "Debil: contiene patrones comunes o poca variedad de caracteres",
+                <= 6 => "Media: contraseña aceptable pero mejorable",
+                _ => "Fuerte: buena longitud y variedad de caracteres"
             };
         }
     }
