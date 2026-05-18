@@ -21,7 +21,8 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
 
             if (diccionario == null || diccionario.Count == 0)
             {
-                Console.WriteLine("Aviso: no hay diccionario cargado"); return;
+                Console.WriteLine("Aviso: no hay diccionario cargado"); 
+                return;
             }
 
             ReglasSeguridad reglas = new(diccionario);
@@ -35,6 +36,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
             // Analizar
             string resultado = analizador.Analizar(password);
             Console.WriteLine("Resultado: " + resultado);
+            
 
 
 

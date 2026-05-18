@@ -1,28 +1,57 @@
+using System;
+
 namespace ProyectoFinalSimuladorSeguridadInformatica
 {
-    // Se encarga SOLO de generar contraseñas
+    // Clase encargada únicamente de generar contraseñas
     public class GeneradorContra
     {
+        // Una sola instancia de Random para toda la clase
+        private Random rnd = new Random();
+
+        // Método principal que genera la contraseña
         public string Generar(int longitud)
         {
-            string caracteres = "!@#$%^&*()_+-=[]{}|;':,.<>/?" +
-                                "abcdefghijklmnopqrstuvwxyz0123456789";
+            // Conjuntos de caracteres disponibles
+            string minusculas = "abcdefghijklmnopqrstuvwxyz";
+            string mayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string numeros = "0123456789";
+            string simbolos = "!@#$%^&*()_+-=[]{}|;':,.<>/?";
 
-            
+            // Unión de todos los caracteres
+            string caracteres = minusculas + mayusculas + numeros + simbolos;
+
+            // Validación de longitud mínima
             if (longitud < 8)
-                return "Error: la longitud mínima recomendada es de 8 caracteres";
-
-            Random rnd = new Random();
-            char[] contrasenaArray = new char[longitud];
-
-            // Rellena la contraseña carácter a carácter de forma aleatoria
-            for (int i = 0; i < longitud; i++)
             {
-                contrasenaArray[i] = caracteres[rnd.Next(caracteres.Length)];
+                return "Error: la longitud mínima recomendada es de 8 caracteres";
             }
 
+            // Array donde se construirá la contraseña
+            char[] password = new char[longitud];
 
-            return new string(contrasenaArray);
+            // Garantiza variedad:
+            password[0] = LetraAleatoria(minusculas);
+            password[1] = LetraAleatoria(mayusculas);
+            password[2] = LetraAleatoria(numeros);
+            password[3] = LetraAleatoria(simbolos);
+
+            // Completa el resto de caracteres aleatoriamente
+            for (int i = 4; i < longitud; i++)
+            {
+                password[i] = caracteres[rnd.Next(caracteres.Length)];
+            }
+
+            // Mezcla el orden de los caracteres
+            Random.Shared.Shuffle(password);
+
+            // Convierte el array en string y lo devuelve
+            return new string(password);
+        }
+
+        // Devuelve un carácter aleatorio de un conjunto dado
+        public char LetraAleatoria(string caracteres)
+        {
+            return caracteres[rnd.Next(caracteres.Length)];
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProyectoFinalSimuladorSeguridadInformatica")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8fc56ae5d24c262307238b9dfa021633e6380c39")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+233ea7eed01914cc4766e07e3ace173090f776b5")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProyectoFinalSimuladorSeguridadInformatica")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProyectoFinalSimuladorSeguridadInformatica")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

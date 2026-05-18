@@ -103,9 +103,11 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         {
             return puntuacion switch
             {
-                <= 3 => "Debil: contiene patrones comunes o poca variedad de caracteres",
+                <= 2 => "Muy Débil: contiene patrones obvios o poca longitud",
+                <= 4 => "Débil: poca variedad de caracteres",
                 <= 6 => "Media: contraseña aceptable pero mejorable",
-                _ => "Fuerte: buena longitud y variedad de caracteres"
+                <= 8 => "Fuerte: buena longitud y variedad de caracteres",
+                _ => "Muy Fuerte: contraseña muy segura, difícil de adivinar"
             };
         }
     }

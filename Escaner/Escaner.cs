@@ -259,7 +259,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
             }
 
             // Añadimos cabecera al log
-            logBuilder.AppendLine( $"Análisis del archivo: {ruta}\nFecha: {DateTime.Now}\n\n");
+            logBuilder.AppendLine($"Análisis del archivo: {ruta}\nFecha: {DateTime.Now}\n\n");
 
             try
             {
@@ -284,7 +284,7 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
                 if (File.Exists(rutaFinal))
                 {
                     Console.WriteLine($"[ERROR] Ya existe un log con el nombre '{nombre}'. No se guardará el nuevo log para evitar sobrescribir.");
-                   return;
+                    return;
                 }
                 // Guardamos el archivo
                 File.WriteAllText(rutaFinal, logBuilder.ToString());
@@ -304,16 +304,19 @@ namespace ProyectoFinalSimuladorSeguridadInformatica
         protected string EvaluarSeguridad()
         {
 
-            if (riesgoTotal > 100)
-                return $"RIESGO MUY ALTO (100%)";
+            if (riesgoTotal > 90)
+                return $"RIESGO MUY ALTO ({riesgoTotal}%)";
 
-            if (riesgoTotal < 30)
-                return $"BAJO ({riesgoTotal}%)";
+            if (riesgoTotal > 70)
+                return $"ALTO ({riesgoTotal}%)";
 
-            if (riesgoTotal < 70)
+            if (riesgoTotal > 40)
                 return $"MEDIO ({riesgoTotal}%)";
 
-            return $"ALTO ({riesgoTotal}%)";
+            if (riesgoTotal > 20)
+                return $"BAJO ({riesgoTotal}%)";
+
+            return $"MUY BAJO ({riesgoTotal}%)";
         }
 
     }
